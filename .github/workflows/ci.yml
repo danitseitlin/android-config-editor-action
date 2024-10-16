@@ -19,12 +19,8 @@ jobs:
     - name: Testing action execution
       uses: ./
       with:
-        #pkg_name: android-config-editor
-        #pkg_managers: '[github, npm]'
-        #npm_registry: registry.npmjs.org
-        #npm_access_token: ${{secrets.NPM_AUTH_TOKEN}}
-        #github_access_token: ${{secrets.G_AUTH_TOKEN}}
-        #dry_run: true
         gradlePath: "tests/test.build.gradle"
         applicationId: "new-app-id"
         debug: true
+    - name: Verify application ID
+      run: cat ./tests/test.build.gradle | grep "applicationId"
