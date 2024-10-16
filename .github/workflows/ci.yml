@@ -25,6 +25,6 @@ jobs:
         #npm_access_token: ${{secrets.NPM_AUTH_TOKEN}}
         #github_access_token: ${{secrets.G_AUTH_TOKEN}}
         #dry_run: true
-        gradlePath: "build.gradle"
+        gradlePath: "tests/test.build.gradle"
         applicationId: "new-app-id"
         debug: true

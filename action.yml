@@ -20,6 +20,10 @@ inputs:
   targetSdkVersion:
     description: "The new target SDK version"
     required: false
+  debug:
+    description: "If to display debug logs on Action execution"
+    required: false
+    default: false
   
 outputs:
   result: # id of output

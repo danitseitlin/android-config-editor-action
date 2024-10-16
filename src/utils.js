@@ -22,7 +22,7 @@ function updateFieldsInFile(gradlePath, fields, debug=false) {
                 if(debug) {
                     console.log(`Updating field ${fieldName} to ${fieldValue}`)
                 }
-                newGradle = replaceValueInText(newGradle, fieldName, fieldValue);
+                newGradle = replaceValueInText(newGradle, fieldName, fieldValue, debug);
             }
         })
         fs.writeFile(gradlePath, newGradle, function (err) {
