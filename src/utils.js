@@ -1,31 +1,40 @@
 const core = require('@actions/core');
 const fs = require('fs');
 
-function replaceValueInText(data, fieldName, value, debug=false) {
+function getFieldValue(data, fieldName) {
     const regexPattern = new RegExp(`(${fieldName}(?:\s|=)*)(.*)`)
     const values = data.match(regexPattern)
-    if(debug && values?.length > 0) {
-        console.log(`Found current value: ${values[0]}`)
-    }
-    
-    const replaceValue = typeof value === 'string' ? `${fieldName} \"${value}\"`: `${fieldName} ${value}`
+    return values?.length > 0 ? values[0]: null
+}
+
+function getFieldDataForReplace(name, value) {
+    return typeof value === 'string' ? `${name} \"${value}\"`: `${name} ${value}`
+}
+
+function replaceValueInText(data, fieldName, value) {
+    const regexPattern = new RegExp(`(${fieldName}(?:\s|=)*)(.*)`)
+    const replaceValue = getFieldDataForReplace(fieldName, value)
     data = data.replace(regexPattern, replaceValue);
     return data;
 }
 
 function updateFieldsInFile(gradlePath, fields, debug=false) {
     fs.readFile(gradlePath, 'utf8', function (err, data) {
-        newGradle = data;
-        fields.forEach(function (fieldName) {
-            const fieldValue = core.getInput(fieldName);
+        let updatedGradle = data;
+        fields.forEach(function (fieldData) {
+            const { name, type } = fieldData;
+            const fieldValue = core.getInput(name);
             if(fieldValue.length > 0) {
+                const parsedFieldValue = type === 'number' ? parseInt(fieldValue): fieldValue.toString();
+                const currentFieldValue = getFieldValue(updatedGradle, name)
                 if(debug) {
-                    console.log(`Updating field ${fieldName} to ${fieldValue}`)
+                    console.log(`Updating field ${name} from ${currentFieldValue} to ${parsedFieldValue} (new data => ${getFieldDataForReplace(name, parsedFieldValue)})`)
                 }
-                newGradle = replaceValueInText(newGradle, fieldName, fieldValue, debug);
+                
+                updatedGradle = replaceValueInText(updatedGradle, name, parsedFieldValue);
             }
         })
-        fs.writeFile(gradlePath, newGradle, function (err) {
+        fs.writeFile(gradlePath, updatedGradle, function (err) {
             if (err) throw err;
             core.setOutput("result", `Done`);
         });
