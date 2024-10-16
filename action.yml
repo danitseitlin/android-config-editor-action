@@ -1,0 +1,36 @@
+name: "android-config-editor"
+description: "Edit your Gradle file on the go for a more dynamic way of releasing Apps!"
+inputs:
+  gradlePath:
+    description: "A path to the Gradle file to make changes to!"
+    required: true
+    default: "app/build.gradle"
+  applicationId:
+    description: "The new application ID"
+    required: false
+  versionCode:
+    description: "The new version code"
+    required: false
+  versionName:
+    description: "The new version name"
+    required: false
+  minSdkVersion:
+    description: "The new min SDK version"
+    required: false
+  targetSdkVersion:
+    description: "The new target SDK version"
+    required: false
+  debug:
+    description: "If to display debug logs on Action execution"
+    required: false
+    default: false
+  
+outputs:
+  result: # id of output
+    description: "Action Result"
+runs:
+  using: "node20"
+  main: "dist/index.js"
+branding:
+  color: 'blue'
+  icon: 'anchor'
