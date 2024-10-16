@@ -10,7 +10,7 @@ jobs:
         run: npm install
       - name: Running unittests
         run: npm run unittests
-  action_execution:
+  action execution:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
