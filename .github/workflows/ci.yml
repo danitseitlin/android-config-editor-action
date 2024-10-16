@@ -21,6 +21,15 @@ jobs:
       with:
         gradlePath: "tests/test.build.gradle"
         applicationId: "new-app-id"
+        versionName: 5.5
+        minSdkVersion: "45"
+        targetSdkVersion: 42
         debug: true
     - name: Verify application ID
       run: cat ./tests/test.build.gradle | grep "applicationId"
+    - name: Verify version name
+      run: cat ./tests/test.build.gradle | grep "versionName"
+    - name: Verify minimum SDK version
+      run: cat ./tests/test.build.gradle | grep "minSdkVersion"
+    - name: Verify target SDK version
+      run: cat ./tests/test.build.gradle | grep "targetSdkVersion"
