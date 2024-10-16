@@ -1,4 +1,3 @@
-
 const core = require('@actions/core');
 const { updateFieldsInFile } = require('./src/utils')
 
