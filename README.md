@@ -10,7 +10,7 @@ deployment:
     - name: Setting up the environment
       run: npm install
     - name: Update Android config file
-      uses: danitseitlin/android-config-editor-action@latest
+      uses: danitseitlin/android-config-editor-action@master
       with:
         gradlePath: android/app/build.gradle
         versionCode: 22
