@@ -4,7 +4,7 @@ inputs:
   gradlePath:
     description: "A path to the Gradle file to make changes to!"
     required: true
-    default: "app/build.gradle"
+    default: "android/app/build.gradle"
   applicationId:
     description: "The new application ID"
     required: false

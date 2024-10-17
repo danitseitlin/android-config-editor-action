@@ -10,15 +10,15 @@ deployment:
     - name: Setting up the environment
       run: npm install
     - name: Update Android config file
-      uses: danitseitlin/android-config-editor-action@1.0.0
+      uses: danitseitlin/android-config-editor-action@latest
       with:
-        gradlePath: app/build.bundle
+        gradlePath: android/app/build.gradle
         versionCode: 22
 ```
 
 | Parameters          | Explanation                                                              |
 |-------------------- |--------------------------------------------------------------------------|
-| gradlePath          | The path to the Gradle file we want to adjust. Default: app/build.gradle |
+| gradlePath          | The path to the Gradle file we want to adjust. Default: android/app/build.gradle |
 | applicationId       | The new application ID                                                   |
 | versionCode         | The new version code                                                     |
 | versionName         | The new version name                                                     |
